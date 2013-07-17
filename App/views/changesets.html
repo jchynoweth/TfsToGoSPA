@@ -1,0 +1,26 @@
+﻿ <section class="tfsMain">
+     <div>
+         <table class="tfsTable" style="width: 95%">
+             <thead>
+                 <tr>
+                         
+                     <th>Id</th>
+                     <th>Comment</th>
+                     <th>Committer</th>
+                     <th></th>
+                 </tr>
+             </thead>
+             <tbody data-bind="foreach: changesets()">
+                 <tr data-bind="attrIf: { class: 'alt', _if: ($index() % 2) == 0 }">
+                        
+                     <td data-bind="text: Id"></td>
+                     <td data-bind="text: Comment"></td>
+                     <td data-bind="text: Committer"></td>
+                     <td><a href='#' >Details</a>
+
+                     </td>
+                 </tr>
+             </tbody>
+         </table>
+     </div>    
+ </section>

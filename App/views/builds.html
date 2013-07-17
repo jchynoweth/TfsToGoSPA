@@ -1,0 +1,95 @@
+﻿<section class="tfsMain" style="width: 605px" >
+    <div data-bind="ifnot: selectedBuild">
+        
+        
+            <table style="margin-bottom: 1em">
+                <tr>
+                    <td data-bind="foreach: FilterOptions">
+                        <span data-bind="text: $data, attr: { id: 'ConnectionTfs_' + $index() }" style="padding: 0"></span>
+
+                        <input style="display: inline; padding: 0; margin-right: .5em" type="radio" id="rdoFilterOption" name="Filter" data-bind="value: $data, checked: $root.CurrentFilter, attr: { for: 'ConnectionTfs_' + $index() }" />
+
+                    </td>
+                </tr>
+            </table>
+        
+
+        <table class="tfsTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Definition</th>
+                    <th>Reason</th>
+                    <th>Finished Time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: filteredBuilds()">
+                <tr data-bind="attrIf: { class: 'alt', _if: ($index() % 2) == 0 }">
+                    <td>
+                        <span data-bind="ifnot: Status='Failed'">
+                            <img src="../../Content/Images/button-tick.png" style="vertical-align: middle" /></span>
+                        <span data-bind="if: Status = 'Failed'">
+                            <img data-bind="if: Status = 'Failed'" src="../../Content/Images/button-cross.png" style="vertical-align: middle" /></span>
+
+
+                    </td>
+                    <td data-bind="text: Definition"></td>
+                    <td data-bind="text: Reason"></td>
+                    <td data-bind="date: FinishTime"></td>
+                    <td><a href='#' data-bind='click: $root.showBuildDetails'>Details</a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-bind="with: selectedBuild" class="buildDetails">
+
+        <h2>Build Details</h2>
+        <ul>
+            <li>
+                <label>Definition: </label>
+                <div data-bind="text: Definition"></div>
+            </li>
+            <li>
+                <label>Drop Location: </label>
+                <div data-bind="text: DropLocation"></div>
+            </li>
+            <li>
+                <label>Finish Time: </label>
+                <div data-bind="date: FinishTime"></div>
+            </li>
+            <li>
+                <label>Changed By: </label>
+                <div data-bind="text: LastChangedBy"></div>
+            </li>
+            <li>
+                <label>Number: </label>
+                <div data-bind="text: Number"></div>
+            </li>
+            <li>
+                <label>Project: </label>
+                <div data-bind="text: Project"></div>
+            </li>
+            <li>
+                <label>Reason: </label>
+                <div data-bind="text: Reason"></div>
+            </li>
+
+            <li>
+                <label>Requested By: </label>
+                <div data-bind="text: RequestedBy"></div>
+            </li>
+            <li>
+                <label>Status: </label>
+                <div data-bind="text: Status"></div>
+            </li>
+
+
+        </ul>
+        <div style="float: none; clear: both; padding-top: 2em">
+            <input type="button" value="Show Builds" data-bind="click: $root.showBuildList" />
+        </div>
+    </div>
+</section>
